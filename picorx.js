@@ -32,7 +32,7 @@ const AsyncEmitter = (delay=0)=>{
 };
 
 module.exports = (init={}, delay=0)=>{
-	const emitter = Asyncemitter(delay);
+	const emitter = AsyncEmitter(delay);
 	const getPaths = (curr, key)=>curr.length==0 ? [key] : curr.concat(curr[curr.length-1] + '.' + key);
 	const create = (init, paths=[])=>{
 		const prox = new Proxy(Array.isArray(init) ? [] : {} , {
