@@ -64,7 +64,8 @@ Data.count = 50; //Fires no events
 Data.count = 49; //Triggers the 'count' and the '*' listeners
 
 
-// If an assignment does not change the true value of an object, pico-rx will not update it's reference, meaning you can use === to test if changes happened very performantly and intutively
+// If an assignment does not change the true value of an object, pico-rx will not update it's reference,
+// meaning you can use === to test if changes happened very performantly and intutively
 
 const Bob = Data.users[0];
 
@@ -72,7 +73,8 @@ Data.users[0].name = 'Bob'; // No events fired
 Data.users[0] === Bob; // true since nothing has changed
 
 
-// Since the value of users[0] is set to the exact same contents, no event is fired and no reference is updated.
+// Since the value of users[0] is set to the exact same contents, no event is fired
+// and no reference is updated.
 Data.users[0] = {
 	name : 'Bob',
 	valid : true
@@ -94,7 +96,8 @@ The Emitter is also a "stepped" emitter, so if you update a nested property it f
 
 ```js
 Emitter = {
-	active : true,  //Toggle to turn off the emitter, useful to toggle for big updates without overwhelming your listeners
+	active : true,  //Toggle to turn off the emitter, useful to toggle for big updates
+					// without overwhelming your listeners
 	listeners : {},  //A map of event & array of listener functions. Can edit directly.
 	emit : (event)=>{}, // Fire an event manually
 	on : (event, func)=>{}, // Adds a listener function to a specific event. Returns an 'off' function.
