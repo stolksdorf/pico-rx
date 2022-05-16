@@ -22,13 +22,13 @@ I wanted to create a simple drop-in utility that gave me events and equality che
 
 ### How to use
 
-`pico-rx` takes an array or object, and returns a two-value array. First value being a proxied version of the input, and the second being an event emitter.
+`pico-rx` takes an array or object, and returns a three-value array. First value being a proxied version of the input, the second being an event emitter, and the third is a convenice method for getting values from the object using string notation, eg. `users.0.name`.
 
 ```js
 const rx = require('./pico-rx.js');
 
 // Wrap an existing object
-const [Data, Emitter] = rx({
+const [Data, Emitter, Get] = rx({
 	users : [
 		{ name : 'Bob', valid : true },
 		{ name : 'Alice', valid : false },
@@ -38,6 +38,9 @@ const [Data, Emitter] = rx({
 
 //Access the object as normal
 console.log(Data.users[0].name);
+
+// Can use the 'Get' function to access parts of the object using string notation
+const BobsName = Get('users.0.name');
 
 
 //Create listeners
@@ -157,6 +160,39 @@ const CounterDisplay = function(counterId){
 			></input>
 	</div>
 };
+```
+
+### Hooks
+
+Using the `Getter` function is pretty easy to create a hook to make the components even simpler
+
+```jsx
+const [Store, Emitter, Get] = require('./pico-rx.js')({
+	counters : {
+		alpha : { count : 0, active : true },
+		beta : { count : 0, active : true },
+	}
+});
+
+const useStore = (valuePath)=>{
+	const [obj, setObj] = React.useState(Get(valuePath));
+	React.useEffect(()=>{
+		return Emitter.on(valuePath, ()=>setObj(Get(valuePath)));
+	}, []);
+	return obj;
+};
+
+const Counter = function(counterId){
+	const counter = useStore(`counters.${counterId}`);
+	return <button
+		disabled={counter.active}
+		onClick={()=>counter.count++}>
+			{counterId}
+	</button>;
+};
+
+// ....
+
 ```
 
 
