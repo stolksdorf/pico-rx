@@ -1,0 +1,24 @@
+{
+  "name": "pico-rx",
+  "version": "1.0.0",
+  "description": "Tiny, event-y, and pseudo-immutable proxy for Javascript objects",
+  "main": "picorx.js",
+  "scripts": {
+    "test": "pico-check ./tests",
+    "dev": "pico-check -w ./tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stolksdorf/pico-rx.git"
+  },
+  "keywords": ["event", "immutable", "emitter", "js", "javascript"],
+  "author": "stolksdorf <scott.tolksdorf@gmail.com> (https://stolksdorf.dev/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stolksdorf/pico-rx/issues"
+  },
+  "homepage": "https://github.com/stolksdorf/pico-rx#readme",
+  "devDependencies": {
+    "pico-check": "^3.0.3"
+  }
+}
